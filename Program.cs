@@ -3,6 +3,7 @@ using Microsoft.ML.Trainers;
 using MovieRecommender;
 
 
+
 //Ponto de partida para as operacoes ML.NET
 /*A inicialização mlContextcria um novo ambiente
 ML.NET que pode ser compartilhado entre os objetos de fluxo
@@ -42,8 +43,8 @@ ITransformer BuildAndTrainModel(MLContext mlContext, IDataView trainingDataView)
     MatrixColumnIndexColumnName = "userIdEncoded",
     MatrixRowIndexColumnName = "movieIdEncoded",
     LabelColumnName = "Label",
-    NumberOfIterations = 20,
-    ApproximationRank = 100
+    NumberOfIterations = 100,
+    ApproximationRank = 150
 };
 
     var trainerEstimator = estimator.Append(mlContext.Recommendation().Trainers.MatrixFactorization(options));
@@ -82,11 +83,11 @@ void UseModelForSinglePrediction(MLContext mlContext, ITransformer model)
     Console.WriteLine("=============== Realizando uma previsão ===============");
     var predictionEngine = mlContext.Model.CreatePredictionEngine<MovieRating, MovieRatingPrediction>(model);
 
-    var testInput = new MovieRating { userId = 11, movieId = 200 };
+    var testInput = new MovieRating { userId = 453, movieId = 2 };
 
     var movieRatingPrediction = predictionEngine.Predict(testInput);
 
-    if (Math.Round(movieRatingPrediction.Score, 1) > 3.5)
+    if (Math.Round(movieRatingPrediction.Score, 1) > 4.3)
     {
         Console.WriteLine(" O filme " + testInput.movieId + " é recomendado para esse usuário " + testInput.userId);
     }

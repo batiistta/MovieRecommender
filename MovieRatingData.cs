@@ -12,6 +12,10 @@ namespace MovieRecommender
     public float movieId;
     [LoadColumn(2)]
     public float Label;
+    [LoadColumn(3)]
+    public float carinho;
+    [LoadColumn(4)]
+    public float agitado;
     }
 
     //Classe criada para representar os resultados previtos.
